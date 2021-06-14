@@ -2,6 +2,7 @@ import sys
 import json
 import os
 
+TOP = "pages"
 
 def front_matter(d):
     items = "\n".join([f"{k}: {v}" for k, v in d.items()])
@@ -46,7 +47,7 @@ def make_site():
                 zip(st["fields"]["Criteria Types"], st["fields"]["Criteria Names"])
             )
             st["criteria"] = [
-                f"[{cn}](/docs/{slugify(ct)}/{slugify(cn)})"
+                f"[{cn}](/{TOP}/{slugify(ct)}/{slugify(cn)})"
                 for ct, cn in criteria_tuples
             ]
         else:
@@ -62,16 +63,16 @@ def make_site():
 
             # create taxonomy directory and index, if needed
             try:
-                os.makedirs(f"{output}/docs/{type_slug}")
+                os.makedirs(f"{output}/{TOP}/{type_slug}")
                 write_index(
-                    f"{output}/docs/{type_slug}",
+                    f"{output}/{TOP}/{type_slug}",
                     front_matter({"title": type_name, "slug": type_slug}),
                 )
             except:
                 pass
 
             sc["slug"] = sc["fields"]["Name"].replace(" ", "-").lower()
-            with open(f"{output}/docs/{type_slug}/{sc['slug']}.md", "w") as fd:
+            with open(f"{output}/{TOP}/{type_slug}/{sc['slug']}.md", "w") as fd:
                 fm = front_matter({"title": sc["fields"]["Name"], "slug": sc["slug"]})
                 fd.write(
                     f"""{fm}
@@ -96,16 +97,16 @@ def make_site():
         name = ""
         breadcrumbs = ""
         if st["type"] == "Order":
-            dir = f"{output}/docs/soil-types/{st['slug']}"
+            dir = f"{output}/{TOP}/soil-types/{st['slug']}"
             name = "_index.md"
         elif st["type"] == "Suborder":
-            dir = f"{output}/docs/soil-types/{st['order']}/{st['slug']}"
+            dir = f"{output}/{TOP}/soil-types/{st['order']}/{st['slug']}"
             name = "_index.md"
-            breadcrumbs = f"[{st['order']}](/docs/soil-types/{st['order']})"
+            breadcrumbs = f"[{st['order']}](/{TOP}/soil-types/{st['order']})"
         elif st["type"] == "Great Group":
-            dir = f"{output}/docs/soil-types/{st['order']}/{st['suborder']}"
+            dir = f"{output}/{TOP}/soil-types/{st['order']}/{st['suborder']}"
             name = f"{st['slug']}.md"
-            breadcrumbs = f"[{st['order']}](/docs/soil-types/{st['order']})"
+            breadcrumbs = f"[{st['order']}](/{TOP}/soil-types/{st['order']})"
         os.makedirs(dir, exist_ok=True)
 
         with open(f"{dir}/{name}", "w") as fd:
@@ -125,7 +126,7 @@ summary: {st["fields"].get("Summary", "")}
             )
         # break
     write_index(
-        f"{output}/docs/soil-types",
+        f"{output}/{TOP}/soil-types",
         front_matter({"title": "Soil Types", "slug": "soil-types"}),
     )
 
