@@ -1,0 +1,44 @@
+baseURL: "https://soil.structourist.com"
+title: Structourist | Soil Classification
+
+# Comment when installing using Hugo Modules
+theme: eureka
+
+# paginate: 1
+copyright: >
+  &copy; 2021 <a href="https://www.structourist.com/">Structourist</a>
+enableEmoji: true
+enableGitInfo: false
+summaryLength: 25
+
+defaultContentLanguage: en
+hasCJKLanguage: false # Set `true` for Chinese/Japanese/Korean.
+defaultContentLanguageInSubdir: false
+
+# Uncomment for google analytics
+# googleAnalytics: UA-123-45
+
+markup:
+  # Do not modify markup.highlight
+  highlight:
+    codeFences: false
+    noClasses: false
+  tableOfContents:
+    startLevel: 2
+    endLevel: 6
+    ordered: false
+  goldmark:
+    renderer:
+      unsafe: true
+
+taxonomies:
+  moisture-regime: "moisture-regimes"
+  temperature-regime: "temperature-regimes"
+  horizon: "horizons"
+  epipedon: "epipedons"
+  soil-materials: "soil-materials"
+  subsoil-features: "subsoil-features"
+  soil-conditions: "soil-conditions"  
+
+build:
+  useResourceCacheWhen: always

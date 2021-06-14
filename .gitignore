@@ -1,0 +1,6 @@
+.env
+.mypy_cache
+site/
+bin/
+out/
+.vscode/

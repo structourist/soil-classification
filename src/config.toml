@@ -1,0 +1,16 @@
+baseURL = "https://soil.structourist.com"
+theme = "anatole"
+languageCode = "en-us"
+title = "Structourist: Soil Classification"
+enableRobotsTXT = true
+paginate = 25
+
+[taxonomies]
+  moisture-regime = "moisture-regimes"
+  temperature-regime = "temperature-regimes"
+  horizon = "horizons"
+  use = "uses"
+  epipedon = "epipedons"
+  soil-materials = "soil-materials"
+  subsoil-features = "subsoil-features"
+  soil-conditions = "soil-conditions"
